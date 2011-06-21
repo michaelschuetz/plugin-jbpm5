@@ -1,17 +1,19 @@
 package iam.pschaerf.forge.plugin.jbpm5.facet;
 
+import iam.pschaerf.forge.plugin.jbpm5.dependencies.Jbpm5Bpmn2Version;
 import iam.pschaerf.forge.plugin.jbpm5.dependencies.Jbpm5FlowBuilderVersion;
 import iam.pschaerf.forge.plugin.jbpm5.dependencies.Jbpm5FlowVersion;
-import iam.pschaerf.forge.plugin.jbpm5.dependencies.Jbpm5Version;
+
+import java.util.Arrays;
+
+import javax.inject.Inject;
+
 import org.jboss.seam.forge.project.dependencies.Dependency;
 import org.jboss.seam.forge.project.facets.BaseFacet;
 import org.jboss.seam.forge.project.facets.DependencyFacet;
 import org.jboss.seam.forge.shell.ShellPrompt;
 import org.jboss.seam.forge.shell.plugins.Alias;
 import org.jboss.seam.forge.shell.plugins.RequiresFacet;
-
-import javax.inject.Inject;
-import java.util.Arrays;
 
 @Alias("Jbpm5Facet")
 @RequiresFacet({DependencyFacet.class})
@@ -61,10 +63,10 @@ public class Jbpm5Facet extends BaseFacet {
         return true;    	
     }
     
-    private boolean isJbpm5Installed() {
+    private boolean isJbpm5Bpmn2Installed() {
         DependencyFacet dependencyFacet = getProject().getFacet(DependencyFacet.class);
 
-        for (Jbpm5Version version : Jbpm5Version.values()) {
+        for (Jbpm5Bpmn2Version version : Jbpm5Bpmn2Version.values()) {
             for (Dependency dependency : version.getDependencies()) {
                 if (!dependencyFacet.hasDependency(dependency)) {
                     return false;
@@ -82,18 +84,18 @@ public class Jbpm5Facet extends BaseFacet {
     	if(!isJbpm5FlowBuilderInstalled()) {
     		installJbpm5FlowBuilder();
     	}	
-    	if(!isJbpm5Installed()) {
-    		installJbpm5();
+    	if(!isJbpm5Bpmn2Installed()) {
+    		installJbpm5Bpmn2();
     	}
     }
     
     
-    private void installJbpm5() {
-        Jbpm5Version version = shellPrompt.promptChoiceTyped("Chose a version:",
-                Arrays.asList(Jbpm5Version.values()));
+    private void installJbpm5Bpmn2() {
+        Jbpm5Bpmn2Version version = shellPrompt.promptChoiceTyped("Chose a version:",
+                Arrays.asList(Jbpm5Bpmn2Version.values()));
 
         DependencyFacet dependencyFacet = project.getFacet(DependencyFacet.class);
-        for (Dependency dependency : Jbpm5Version.JBPM_5_5_0_0.getDependencyManagement()) {
+        for (Dependency dependency : Jbpm5Bpmn2Version.JBPM5_BPMN2_5_5_0_0.getDependencyManagement()) {
             dependencyFacet.addDependency(dependency);
         }
 
