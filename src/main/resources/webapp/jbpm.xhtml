@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/resources/forge-template.xhtml">
+
+	<ui:param name="pageTitle" value="jBPM 5" />
+
+	<ui:define name="header">
+		jBPM 5
+	</ui:define>
+
+	<ui:define name="subheader">
+		Welcome to my jBPM 5 test page
+	</ui:define>
+
+	<ui:define name="footer">
+	</ui:define>
+
+	<ui:define name="left">
+		<h3>Info</h3>
+		<p>Das ist eine Seite, um jBPM 5 auf dem JBoss-AS 6 zu testen</p>
+	</ui:define>
+
+	<ui:define name="main">
+		<h3>Testprozess:</h3>
+		<p>Hier ist ein kleiner beispiel Prozess:</p>
+
+		<h:form id="form">
+			<h:messages />
+			<br />
+			<h:commandButton value="Start Prozess" action="#{jbpmBean.startProcess()}" />
+			<br />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+
