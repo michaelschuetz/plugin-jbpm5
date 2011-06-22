@@ -30,10 +30,11 @@ This plugin configures plain WAR-based Java EE 6 project (eays to generate wiht 
 
 Next steps
 ##########
+* setup jBPM5 console
+* persistence support
 * exposing Service within AS container
 * real CDI-Integration
 * Lifecycle annotations?
-* persistence support
 * cleaning up
 
 --> Forge Jira issue: https://issues.jboss.org/browse/SEAMFORGE-220
