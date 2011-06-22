@@ -1,7 +1,3 @@
-import javax.ejb.Stateful;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.drools.KnowledgeBase;
 import org.drools.builder.KnowledgeBuilder;
@@ -10,6 +6,9 @@ import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 
+import javax.ejb.Stateful;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 @Named
 @Stateful
 @RequestScoped
