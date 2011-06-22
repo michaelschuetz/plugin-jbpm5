@@ -1,3 +1,39 @@
 Seam Forge jBPM5 plugin.
 
-#### Draft #### 
+Getting started
+###############
+
+1) Install Plugin
+forge list-plugins --all 
+forge git-plugin git://github.com/michaelschuetz/plugin-jbpm5.git --ref "0.2"
+
+2) Create new Seam Forge project
+new-project --named jbpm5-sandbox --topLevelPackage com.acme
+scaffold setup 
+scaffold create-indexes
+
+3) Initialize jBPM5 and setup sample process
+jbpm5 setup
+jbpm5 scaffold 
+
+
+Current features
+################
+
+This plugin configures plain WAR-based Java EE 6 project (eays to generate wiht Forge):
+* Maven dependencies
+* sample process
+* sample Bean including Knowlesge-Session
+* sample JSF access
+
+
+Next steps
+##########
+* exposing Service within AS container
+* real CDI-Integration
+* Lifecycle annotations?
+* persistence support
+* cleaning up
+
+Any help and feedback welcome!! (-:
+
