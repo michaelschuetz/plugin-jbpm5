@@ -5,7 +5,8 @@ Getting started
 
 1) Install Plugin
 forge list-plugins --all 
-forge git-plugin git://github.com/michaelschuetz/plugin-jbpm5.git --ref "0.2"
+forge git-plugin git://github.com/michaelschuetz/plugin-jbpm5.git
+(specific tag: --ref "0.4")
 
 2) Create new Seam Forge project
 new-project --named jbpm5-sandbox --topLevelPackage com.acme
