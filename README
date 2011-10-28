@@ -4,18 +4,18 @@ Getting started
 ###############
 
 1) Install Plugin
-forge list-plugins --all 
+forge list-plugins --all
 forge git-plugin git://github.com/michaelschuetz/plugin-jbpm5.git
 (specific tag: --ref "0.4")
 
 2) Create new Seam Forge project
 new-project --named jbpm5-sandbox --topLevelPackage com.acme
-scaffold setup 
+scaffold setup
 scaffold create-indexes
 
 3) Initialize jBPM5 and setup sample process
 jbpm5 setup
-jbpm5 scaffold 
+jbpm5 scaffold
 
 
 Current features

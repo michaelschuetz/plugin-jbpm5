@@ -49,106 +49,106 @@ public class Jbpm5Plugin implements Plugin {
 		} else {
 			ShellMessages.info(shell, "jBPM 5 is not installed. Use 'jbpm5 setup' to get started");
 		}
-		
+
 	}
 
 	@Command("setup")
-	public void setup() {	
+	public void setup() {
 		if (!project.hasFacet(Jbpm5Facet.class)) {
 			installFacets.fire(new InstallFacets(Jbpm5Facet.class));
 		}
 		if (project.hasFacet(Jbpm5Facet.class)) {
 			ShellMessages.success(shell, "jBPM 5 is configured");
-		}	
+		}
 	}
-	
+
 	@Command("help")
 	public void help() {
 		shell.println("HELP");
 	}
-	
+
 	@Command("scaffold")
 	public void scaffold() {
 		copyResource("", "process.bpmn");
-		
+
 		copySourcesToRootPackage("", "JbpmBean.java");
-		copySourcesToRootPackage("", "TestTask1.java");		
-		
+		copySourcesToRootPackage("", "TestTask1.java");
+
 		copyWebfiles("", "jbpm.xhtml");
 		ShellMessages.success(shell, "jBPM 5 scaffold installed.");
 	}
-	
+
 	private void copyWebfiles(String webFilePath, String webFileName) {
-		if(project.hasFacet(WebResourceFacet.class)) {	
+		if(project.hasFacet(WebResourceFacet.class)) {
 			DirectoryResource basePackage = project.getFacet(WebResourceFacet.class).getWebRootDirectory();
-			
+
 			InputStream inputStream = Jbpm5Plugin.class.getResourceAsStream("/webapp"+ webFilePath +"/"+ webFileName);
-	
+
 			FileResource<?> fileResource = (FileResource<?>) basePackage.getChild(webFileName);
 			fileResource.setContents(inputStream);
 		} else {
 			ShellMessages.error(shell, "WebResourceFacet not found!");
 		}
-	}	
-	
+	}
+
 	private void copySourcesToRootPackage(String sourceFilePath, String sourceFileName) {
-		if(project.hasFacet(JavaSourceFacet.class)) {	
-			DirectoryResource basePackage = project.getFacet(JavaSourceFacet.class).getBasePackageResource();		
-			
-			String projektPackageName = project.getFacet(JavaSourceFacet.class).getBasePackage();	
-			
+		if(project.hasFacet(JavaSourceFacet.class)) {
+			DirectoryResource basePackage = project.getFacet(JavaSourceFacet.class).getBasePackageResource();
+
+			String projektPackageName = project.getFacet(JavaSourceFacet.class).getBasePackage();
+
 			ShellMessages.info(shell, project.getFacet(JavaSourceFacet.class).getBasePackage()); // der komplette packagename de.tesprojkekt
 			InputStream inputStream = Jbpm5Plugin.class.getResourceAsStream("/src"+ sourceFilePath +"/"+ sourceFileName);
-			
+
 			FileResource<?> fileResource = (FileResource<?>) basePackage.getChild(sourceFileName);
 			fileResource.setContents(inputStream);
-			
+
 			if (fileResource instanceof JavaResource) {
 				try {
 					JavaSource<?> source = ((JavaResource) fileResource).getJavaSource();
 					if(source.isClass()) {
 						final JavaSourceFacet javaFacet = project.getFacet(JavaSourceFacet.class);
 						JavaClass clazz = (JavaClass) source;
-						
+
 						ShellMessages.info(shell, source.getName() +" => set packageName to: "+ projektPackageName);
 						clazz.setPackage(projektPackageName);
 						javaFacet.saveJavaSource(clazz);
 					}
 				} catch (FileNotFoundException e) {
-					e.getMessage();	
+					e.getMessage();
 				}
-			}		
-			
+			}
+
 		} else {
 			ShellMessages.error(shell, "JavaSourceFacet not found!");
 		}
 	}
-	
+
 	private void copySources(String sourceFilePath, String sourceFileName) {
-		if(project.hasFacet(JavaSourceFacet.class)) {	
+		if(project.hasFacet(JavaSourceFacet.class)) {
 			DirectoryResource basePackage = project.getFacet(JavaSourceFacet.class).getSourceFolder();
 			InputStream inputStream = Jbpm5Plugin.class.getResourceAsStream("/src"+ sourceFilePath +"/"+ sourceFileName);
-	
+
 			FileResource<?> fileResource = (FileResource<?>) basePackage.getChild(sourceFileName);
-			fileResource.setContents(inputStream);	
-			
+			fileResource.setContents(inputStream);
+
 		} else {
 			ShellMessages.error(shell, "JavaSourceFacet not found!");
 		}
-	}	
-	
+	}
+
 	private void copyResource(String resourceFilePath, String resourcesFileName) {
 		if(project.hasFacet(ResourceFacet.class)) {
 			DirectoryResource resourceRoot = project.getFacet(ResourceFacet.class).getResourceFolder();
-	
+
 			InputStream inputStream = Jbpm5Plugin.class.getResourceAsStream("/resources"+ resourceFilePath +"/"+ resourcesFileName);
-	
+
 			FileResource<?> fileResource = (FileResource<?>) resourceRoot.getChild(resourcesFileName);
 			fileResource.setContents(inputStream);
-			
+
 			//TODO only for presentation - adds the packagename to the process.bpmn
 			String fileName = fileResource.getName();
-			if(fileName.equals("process.bpmn")) {		
+			if(fileName.equals("process.bpmn")) {
 				String pathName = resourceRoot.getName();
 				ShellMessages.info(shell, "FileName "+ pathName +" - "+ fileName);
 				String projektPackageName = project.getFacet(JavaSourceFacet.class).getBasePackage();

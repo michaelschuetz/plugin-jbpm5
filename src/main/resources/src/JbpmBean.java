@@ -12,10 +12,10 @@ import javax.inject.Named;
 @Named
 @Stateful
 @RequestScoped
-public class JbpmBean { 
+public class JbpmBean {
     public void startProcess() {
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		
+
 		kbuilder.add(ResourceFactory.newClassPathResource("process.bpmn"), ResourceType.BPMN2);
 
 		KnowledgeBase kbase = kbuilder.newKnowledgeBase();
