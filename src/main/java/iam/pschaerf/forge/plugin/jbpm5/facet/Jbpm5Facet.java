@@ -20,7 +20,7 @@ import org.jboss.seam.forge.shell.plugins.RequiresFacet;
 public class Jbpm5Facet extends BaseFacet {
     @Inject
     private ShellPrompt shellPrompt;
-    
+
     @Override
     public boolean install() {
         installDependencies();
@@ -33,10 +33,10 @@ public class Jbpm5Facet extends BaseFacet {
     	if(isJbpm5FlowInstalled() && isJbpm5FlowBuilderInstalled() && isJbpm5FlowBuilderInstalled()) {
     		return true;
     	}
-    	
+
     	return false;
     }
-    
+
     private boolean isJbpm5FlowInstalled() {
         DependencyFacet dependencyFacet = getProject().getFacet(DependencyFacet.class);
 
@@ -47,9 +47,9 @@ public class Jbpm5Facet extends BaseFacet {
                 }
             }
         }
-        return true;     	
+        return true;
     }
-    
+
     private boolean isJbpm5FlowBuilderInstalled() {
         DependencyFacet dependencyFacet = getProject().getFacet(DependencyFacet.class);
 
@@ -60,9 +60,9 @@ public class Jbpm5Facet extends BaseFacet {
                 }
             }
         }
-        return true;    	
+        return true;
     }
-    
+
     private boolean isJbpm5Bpmn2Installed() {
         DependencyFacet dependencyFacet = getProject().getFacet(DependencyFacet.class);
 
@@ -75,7 +75,7 @@ public class Jbpm5Facet extends BaseFacet {
         }
         return true;
     }
-    
+
 
     private void installDependencies() {
     	if(!isJbpm5FlowInstalled()) {
@@ -83,13 +83,13 @@ public class Jbpm5Facet extends BaseFacet {
     	}
     	if(!isJbpm5FlowBuilderInstalled()) {
     		installJbpm5FlowBuilder();
-    	}	
+    	}
     	if(!isJbpm5Bpmn2Installed()) {
     		installJbpm5Bpmn2();
     	}
     }
-    
-    
+
+
     private void installJbpm5Bpmn2() {
         Jbpm5Bpmn2Version version = shellPrompt.promptChoiceTyped("Chose a version:",
                 Arrays.asList(Jbpm5Bpmn2Version.values()));
@@ -102,9 +102,9 @@ public class Jbpm5Facet extends BaseFacet {
         dependencyFacet = project.getFacet(DependencyFacet.class);
         for (Dependency dependency : version.getDependencies()) {
             dependencyFacet.addDependency(dependency);
-        }   	
+        }
     }
-    
+
     private void installJbpm5Flow() {
         Jbpm5FlowVersion version = shellPrompt.promptChoiceTyped("Chose a version:",
                 Arrays.asList(Jbpm5FlowVersion.values()));
@@ -117,9 +117,9 @@ public class Jbpm5Facet extends BaseFacet {
         dependencyFacet = project.getFacet(DependencyFacet.class);
         for (Dependency dependency : version.getDependencies()) {
             dependencyFacet.addDependency(dependency);
-        }    	
+        }
     }
-    
+
     private void installJbpm5FlowBuilder() {
     	Jbpm5FlowBuilderVersion version = shellPrompt.promptChoiceTyped("Chose a version:",
                 Arrays.asList(Jbpm5FlowBuilderVersion.values()));
@@ -132,7 +132,7 @@ public class Jbpm5Facet extends BaseFacet {
         dependencyFacet = project.getFacet(DependencyFacet.class);
         for (Dependency dependency : version.getDependencies()) {
             dependencyFacet.addDependency(dependency);
-        }    	
+        }
     }
 }
 

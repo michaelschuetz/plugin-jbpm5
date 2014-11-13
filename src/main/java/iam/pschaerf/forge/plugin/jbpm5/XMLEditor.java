@@ -19,23 +19,23 @@ import org.xml.sax.SAXException;
 public class XMLEditor {
 	public XMLEditor() {
 	}
-    
+
 	public static void edit(String xmlFile, String value) {
-        
+
         try {
-            
-            
-            
+
+
+
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse(xmlFile);
-            
+
             document.getElementsByTagName("tns:import").item(0).getAttributes().getNamedItem("name").setTextContent(value);
 
-               
+
             TransformerFactory.newInstance().newTransformer().transform(
                     new DOMSource(document), new StreamResult(new FileOutputStream(xmlFile)));
-            
+
         } catch (ParserConfigurationException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
